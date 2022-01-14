@@ -59,11 +59,14 @@ define(function (require) {
                     return;
                 }
                 var orders = [];
-                orders.push(data.result);
+                orders = data.result;
                 console.log(orders);
-                var items =[];
 
-                
+                var items =[];
+                orders.forEach(order => {
+                    items+=order.items;
+                });
+                console.log(items);
 
             });
         };

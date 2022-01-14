@@ -83,7 +83,7 @@ define(function (require) {
                     console.log(templates);
                     //need template name
                     var template = templates.find(t => t.TemplateName == "default");
-                    printService.CreatePDFfromJobForceTemplate("Stock Item Labels", items, template.pkTemplateRowId, [], "PDF", (res) =>{
+                    printService.CreatePDFfromJobForceTemplate("Stock Item Labels", items.map(i => {return i.ItemId}), template.pkTemplateRowId, [], "PDF", (res) =>{
                         if(res.error)
                         {
                             return;

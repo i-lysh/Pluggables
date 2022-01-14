@@ -68,7 +68,7 @@ define(function (require) {
                 //     console.log(orderItems);
                 //     items+=orderItems;
                 // });
-                items = orders.flatMap(x => [x.Items])
+                items = orders.flatMap(x => x.Items);
                 // items = orders.map(o => {return o.Items});
                 console.log(items);
                 items.sort((a,b) =>{

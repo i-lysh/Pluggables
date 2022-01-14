@@ -44,7 +44,7 @@ define(function (require) {
             for (var i = 0; i < orders.length; i++)
             {
                 var items = orders[i].items;
-                ids+=items;
+                ids.push(items);
             }
             
             alert(ids.length);

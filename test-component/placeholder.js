@@ -39,7 +39,7 @@ define(function (require) {
                 alert('Please select at least one order');
                 return;
             }
-            
+            console.log(orders);
             var ids = [];
             for (var i = 0; i < orders.length; i++)
             {

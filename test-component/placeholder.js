@@ -31,7 +31,7 @@ define(function (require) {
 
             const self = this;
 
-            const orderService = new Services.OrderService(self);
+            const orderService = new Services.OrdersService(self);
             const printService = new Services.PrintService(self);
 
             console.log(orderService);

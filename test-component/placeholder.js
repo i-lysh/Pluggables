@@ -31,8 +31,9 @@ define(function (require) {
 
             const self = this;
 
-           // const macroService = new Services.PrintService(self);
-            console.log(Services);
+            const printService = new Services.PrintService(self);
+            console.log(printService);
+            //console.log(Services);
 
             if (orders.length < 1) {
                 alert('Please select at least one order');

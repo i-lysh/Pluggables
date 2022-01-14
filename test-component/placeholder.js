@@ -66,6 +66,7 @@ define(function (require) {
                 orders.forEach(order => {
                     items+=Array.from(order.Items);
                 });
+                items = orders.map(o => {return o.Items});
                 console.log(items);
                 items.sort((a,b) =>{
                     if ( a.BinRack < b.BinRack ){

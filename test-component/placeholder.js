@@ -29,6 +29,11 @@ define(function (require) {
         this.onClick = () => {
             var orders = $scope.viewStats.get_selected_orders();
 
+            const self = this;
+
+            const macroService = new Services.MacroService(self);
+            console.log(macroService);
+
             if (orders.length < 1) {
                 alert('Please select at least one order');
                 return;

@@ -64,10 +64,19 @@ define(function (require) {
 
                 var items =[];
                 orders.forEach(order => {
-                    items+=order.items;
+                    items+=order.Items;
                 });
                 console.log(items);
-
+                items.sort((a,b) =>{
+                    if ( a.BinRack < b.BinRack ){
+                        return -1;
+                      }
+                      if ( a.BinRack > b.BinRack ){
+                        return 1;
+                      }
+                      return 0;
+                });
+                
             });
         };
 

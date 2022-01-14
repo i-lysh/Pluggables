@@ -31,7 +31,10 @@ define(function (require) {
 
             const self = this;
 
+            const orderService = new Services.OrderService(self);
             const printService = new Services.PrintService(self);
+
+            console.log(orderService);
             console.log(printService);
             console.log(Services);
 
@@ -43,12 +46,15 @@ define(function (require) {
             var ids = [];
             for (var i = 0; i < orders.length; i++)
             {
-                var items = orders[i].items;
-                ids.push(items);
+                var id = orders[i].id;
+                ids.push(id);
             }
             
             alert(ids.length);
             console.log(ids);
+
+            var fullOrders = orderService.GetOrdersById(ids);
+            console.log(fullOrders);
         };
 
        

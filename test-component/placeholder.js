@@ -63,9 +63,9 @@ define(function (require) {
                 console.log(orders);
 
                 var items =[];
-                orders.forEach(order => {
-                    items+=Array.from(order.Items);
-                });
+                // orders.forEach(order => {
+                //     items+=Array.from(order.Items);
+                // });
                 items = orders.map(o => {return o.Items});
                 console.log(items);
                 items.sort((a,b) =>{

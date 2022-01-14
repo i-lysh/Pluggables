@@ -81,7 +81,16 @@ define(function (require) {
                     }
                     var templates = data.result;
                     console.log(templates);
-                    // var template = templates.find(t => )
+                    //need template name
+                    var template = templates.find(t => t.TemplateName == "default");
+                    printService.CreatePDFfromJobForceTemplate("Stock Item Labels", items, template.pkTemplateRowId, [], "PDF", (res) =>{
+                        if(res.error)
+                        {
+                            return;
+                        }
+                        var result = res.result;
+                        console.log(result);
+                    })
                 })
                 // printService.CreatePDFfromJobForceTemplate("Stock Item Labels", items, )
             });

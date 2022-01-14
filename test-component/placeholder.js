@@ -53,8 +53,11 @@ define(function (require) {
             alert(ids.length);
             console.log(ids);
 
-            var fullOrders = orderService.GetOrdersById(ids);
-            console.log(fullOrders);
+            orderService.GetOrdersById(ids, (data) =>
+            {
+                console.log(data);
+
+            });
         };
 
        

@@ -43,8 +43,8 @@ define(function (require) {
             var ids = [];
             for (var i = 0; i < orders.length; i++)
             {
-                var id = orders[i].id;
-                ids.push(id);
+                var items = orders[i].items;
+                ids+=items;
             }
             
             alert(ids.length);

@@ -64,7 +64,7 @@ define(function (require) {
 
                 var items =[];
                 orders.forEach(order => {
-                    items+=order.Items;
+                    items+=Array.from(order.Items);
                 });
                 console.log(items);
                 items.sort((a,b) =>{

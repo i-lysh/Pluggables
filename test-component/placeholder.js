@@ -62,14 +62,7 @@ define(function (require) {
                 orders = data.result;
                 console.log(orders);
 
-                var items =[];
-                // orders.forEach(order => {
-                //     var orderItems = order.Items;
-                //     console.log(orderItems);
-                //     items+=orderItems;
-                // });
-                items = orders.flatMap(x => x.Items);
-                // items = orders.map(o => {return o.Items});
+                var items = orders.flatMap(x => x.Items);
                 console.log(items);
                 items.sort((a,b) =>{
                     if ( a.BinRack < b.BinRack ){
@@ -81,6 +74,16 @@ define(function (require) {
                       return 0;
                 });
                 
+                printService.GetTemplateList("Stock Item Labels", (data) =>{
+                    if(data.error)
+                    {
+                        return;
+                    }
+                    templates = data.result;
+                    console.log(templates);
+                    // var template = templates.find(t => )
+                })
+                // printService.CreatePDFfromJobForceTemplate("Stock Item Labels", items, )
             });
         };
 

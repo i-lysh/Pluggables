@@ -63,11 +63,12 @@ define(function (require) {
                 console.log(orders);
 
                 var items =[];
-                orders.forEach(order => {
-                    var orderItems = o.Items;
-                    console.log(orderItems);
-                    items+=orderItems;
-                });
+                // orders.forEach(order => {
+                //     var orderItems = order.Items;
+                //     console.log(orderItems);
+                //     items+=orderItems;
+                // });
+                items = orders.flatMap(x => [x.Items])
                 // items = orders.map(o => {return o.Items});
                 console.log(items);
                 items.sort((a,b) =>{

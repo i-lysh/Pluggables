@@ -64,7 +64,9 @@ define(function (require) {
 
                 var items =[];
                 orders.forEach(order => {
-                    items+=order.Items.map(i => {return i});
+                    var orderItems = o.Items;
+                    console.log(orderItems);
+                    items+=orderItems;
                 });
                 // items = orders.map(o => {return o.Items});
                 console.log(items);

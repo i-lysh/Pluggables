@@ -79,7 +79,7 @@ define(function (require) {
                     {
                         return;
                     }
-                    templates = data.result;
+                    var templates = data.result;
                     console.log(templates);
                     // var template = templates.find(t => )
                 })

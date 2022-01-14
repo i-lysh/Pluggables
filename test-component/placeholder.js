@@ -55,7 +55,15 @@ define(function (require) {
 
             orderService.GetOrdersById(ids, (data) =>
             {
-                console.log(data);
+                if(data.error != null){
+                    return;
+                }
+                var orders = [];
+                orders.push(data.result);
+                console.log(orders);
+                var items =[];
+
+                
 
             });
         };

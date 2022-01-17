@@ -61,13 +61,7 @@ define(function (require) {
                 var items = orders.flatMap(x => x.Items);
                 
                 items.sort((a,b) =>{
-                    if ( a.BinRack < b.BinRack ){
-                        return -1;
-                      }
-                      if ( a.BinRack > b.BinRack ){
-                        return 1;
-                      }
-                      return 0;
+                    return a.BinRack == b.BinRack ? 0 : a.BinRack < b.BinRack ? -1 : 1;
                 });
                 
                 printService.GetTemplateList("Stock Item Labels", (data) =>{
@@ -96,7 +90,7 @@ define(function (require) {
                         }
 
                         var result = res.result;
-                        
+
                         printService.OpenPrintDialog(result.URL);
                     })
                 })

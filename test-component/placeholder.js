@@ -60,13 +60,19 @@ define(function (require) {
 
                 var items = orders.flatMap(x => x.Items);
                 
-                console.log(items);
-
                 items.sort((a,b) =>{
-                    return a.ItemNumber == b.ItemNumber ? 0 : a.ItemNumber < b.ItemNumber ? -1 : 1;
+                    if ( a.BinRack < b.BinRack ){
+                        if(a.BinRack.match(/^\d/))
+                        {
+                            return 1;
+                        }
+                        return -1;
+                      }
+                      if ( a.BinRack > b.BinRack ){
+                        return 1;
+                      }
+                      return 0;
                 });
-
-                console.log(items);
                 
                 printService.GetTemplateList("Stock Item Labels", (data) =>{
                     if(data.error)
@@ -94,7 +100,7 @@ define(function (require) {
                         }
 
                         var result = res.result;
-
+                        
                         printService.OpenPrintDialog(result.URL);
                     })
                 })

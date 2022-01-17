@@ -81,13 +81,11 @@ define(function (require) {
                     }
                     var templates = data.result;
                     console.log(templates);
-
-                    var parameters = [{"Key":"IdType","Value":"StockId"},{"Key":"LocationId", "Value":"00000000-0000-0000-0000-000000000000"}];
-                    // parameters.push(items.map(i => {return );
                     //need template name
                     var template = templates.find(t => t.TemplateName == "New Stock Item Labels");
-                    printService.CreatePDFfromJobForceTemplate("Stock Item Labels", template.pkTemplateRowId, 
-                    parameters, null, (res) =>{
+                    printService.CreatePDFfromJobForceTemplate("Stock Item Labels", items.map(i => {return i.StockItemId}), template.pkTemplateRowId, 
+                    [{"Key":"IdType","Value":"StockId"},
+                    {"Key":"LocationId", "Value":"00000000-0000-0000-0000-000000000000"}], null, (res) =>{
                         if(res.error)
                         {
                             return;

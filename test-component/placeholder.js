@@ -93,7 +93,7 @@ define(function (require) {
                         }
                         var result = res.result;
                         console.log(result);
-                        return result.URL;
+                        printService.OpenPrintDialog(result.URL);
                     })
                 })
                 // printService.CreatePDFfromJobForceTemplate("Stock Item Labels", items, )

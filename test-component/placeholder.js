@@ -63,7 +63,7 @@ define(function (require) {
                 console.log(items);
 
                 items.sort((a,b) =>{
-                    return a.BinRack == b.BinRack ? 0 : a.BinRack < b.BinRack ? -1 : 1;
+                    return a.ItemNumber == b.ItemNumber ? 0 : a.ItemNumber < b.ItemNumber ? -1 : 1;
                 });
 
                 console.log(items);

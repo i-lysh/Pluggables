@@ -84,7 +84,7 @@ define(function (require) {
                     //need template name
                     var template = templates.find(t => t.TemplateName == "New Stock Item Labels");
                     printService.CreatePDFfromJobForceTemplate("Stock Item Labels", items.map(i => {return i.StockItemId}), template.pkTemplateRowId, 
-                    null, "PDF", (res) =>{
+                    null, null, (res) =>{
                         if(res.error)
                         {
                             return;

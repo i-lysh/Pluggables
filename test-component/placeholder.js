@@ -28,10 +28,11 @@ define(function (require) {
         };
 
         this.onClick = () => {
+
             var orders = $scope.viewStats.get_selected_orders();
 
             const self = this;
-            console.log(self);
+
             const orderService = new Services.OrdersService(self);
             const printService = new Services.PrintService(self);
 
@@ -53,9 +54,9 @@ define(function (require) {
                 if(data.error != null){
                     return;
                 }
+
                 var orders = [];
                 orders = data.result;
-                console.log(orders);
 
                 var items = orders.flatMap(x => x.Items);
                 
@@ -68,38 +69,43 @@ define(function (require) {
                       }
                       return 0;
                 });
-                console.log(items);
                 
                 printService.GetTemplateList("Stock Item Labels", (data) =>{
                     if(data.error)
                     {
                         return;
                     }
+
                     var templates = data.result;
-                    console.log(templates);
-                    //need template name
+
                     var template = templates.find(t => t.TemplateName == TemplateName);
-                    printService.CreatePDFfromJobForceTemplate("Stock Item Labels", items.map(i => {return i.StockItemId}), template.pkTemplateRowId, 
-                    [{"Key":"IdType","Value":"StockId"},
-                    // {"Key":"LocationId", "Value":"00000000-0000-0000-0000-000000000000"}
-                    ], null, (res) =>{
+
+                    printService.CreatePDFfromJobForceTemplate(
+                        "Stock Item Labels", 
+                        items.map(i => {return i.StockItemId}), 
+                        template.pkTemplateRowId, 
+                        [
+                            {"Key":"IdType","Value":"StockId"},
+                        // {"Key":"LocationId", "Value":"00000000-0000-0000-0000-000000000000"}
+                        ], 
+                        null,
+                        (res) =>{
                         if(res.error)
                         {
                             return;
                         }
+
                         var result = res.result;
-                        console.log(result);
+                        
                         printService.OpenPrintDialog(result.URL);
                     })
                 })
-                // printService.CreatePDFfromJobForceTemplate("Stock Item Labels", items, )
             });
         };
 
        
     };
-      
-
+    
     placeholderManager.register("OpenOrders_OrderControlButtons", placeHolder);
 
 });

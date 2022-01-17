@@ -61,17 +61,19 @@ define(function (require) {
                 var items = orders.flatMap(x => x.Items);
                 
                 items.sort((a,b) =>{
-                    if ( a.BinRack < b.BinRack ){
-                        if(a.BinRack.match(/^\d/))
-                        {
-                            return 1;
-                        }
-                        return -1;
-                      }
-                      if ( a.BinRack > b.BinRack ){
-                        return 1;
-                      }
-                      return 0;
+
+                    return /[A-Za-z]/.test(a.BinRack) - /[A-Za-z]/.test(b.BinRack) || b.BinRack.charCodeAt(0) - a.BinRack.charCodeAt(0);
+                    // if ( a.BinRack < b.BinRack ){
+                    //     if(a.BinRack.match(/^\d/))
+                    //     {
+                    //         return 1;
+                    //     }
+                    //     return -1;
+                    //   }
+                    //   if ( a.BinRack > b.BinRack ){
+                    //     return 1;
+                    //   }
+                    //   return 0;
                 });
                 
                 printService.GetTemplateList("Stock Item Labels", (data) =>{

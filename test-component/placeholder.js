@@ -61,8 +61,7 @@ define(function (require) {
                 var items = orders.flatMap(x => x.Items);
                 
                 items.sort((a,b) =>{
-
-                    return /[A-Za-z]/.test(a.BinRack) - /[A-Za-z]/.test(b.BinRack) || b.BinRack.charCodeAt(0) - a.BinRack.charCodeAt(0);
+                    return a.BinRack.localeCompare(b.BinRack, 'en', { numeric: true });
                     // if ( a.BinRack < b.BinRack ){
                     //     if(a.BinRack.match(/^\d/))
                     //     {

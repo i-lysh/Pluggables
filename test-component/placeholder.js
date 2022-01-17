@@ -60,9 +60,13 @@ define(function (require) {
 
                 var items = orders.flatMap(x => x.Items);
                 
+                console.log(items);
+
                 items.sort((a,b) =>{
                     return a.BinRack == b.BinRack ? 0 : a.BinRack < b.BinRack ? -1 : 1;
                 });
+
+                console.log(items);
                 
                 printService.GetTemplateList("Stock Item Labels", (data) =>{
                     if(data.error)

@@ -13,7 +13,7 @@ define(function (require) {
             var items = [{
                 text: "Test Button",  // Button name
                 key: "placeholderTestButton",  // Button id (unique)
-                icon: "fa fa-angle-double-up",  // Button icon
+                icon: "fas fa-print",  // Button icon
                 content: {
                     moduleName: "placeholderTestButtonTemplate",
                     controlName: "placeholderTestButtonTemplate"
@@ -62,17 +62,6 @@ define(function (require) {
                 
                 items.sort((a,b) =>{
                     return a.BinRack.localeCompare(b.BinRack, 'en', { numeric: true });
-                    // if ( a.BinRack < b.BinRack ){
-                    //     if(a.BinRack.match(/^\d/))
-                    //     {
-                    //         return 1;
-                    //     }
-                    //     return -1;
-                    //   }
-                    //   if ( a.BinRack > b.BinRack ){
-                    //     return 1;
-                    //   }
-                    //   return 0;
                 });
                 
                 printService.GetTemplateList("Stock Item Labels", (data) =>{

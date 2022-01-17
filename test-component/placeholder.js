@@ -13,7 +13,7 @@ define(function (require) {
             var items = [{
                 text: "Test Button",  // Button name
                 key: "placeholderTestButton",  // Button id (unique)
-                icon: "fas fa-print",  // Button icon
+                icon: "fa fa-print",  // Button icon
                 content: {
                     moduleName: "placeholderTestButtonTemplate",
                     controlName: "placeholderTestButtonTemplate"

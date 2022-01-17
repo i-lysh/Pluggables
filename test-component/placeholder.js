@@ -4,6 +4,7 @@ define(function (require) {
     const placeholderManager = require("core/placeholderManager");
 
     var docDefinition;
+    const TemplateName = "Test";
 
     var placeHolder = function ($scope, $element, controlService) {
 
@@ -30,19 +31,15 @@ define(function (require) {
             var orders = $scope.viewStats.get_selected_orders();
 
             const self = this;
-
+            console.log(self);
             const orderService = new Services.OrdersService(self);
             const printService = new Services.PrintService(self);
-
-            console.log(orderService);
-            console.log(printService);
-            console.log(Services);
 
             if (orders.length < 1) {
                 alert('Please select at least one order');
                 return;
             }
-            console.log(orders);
+
             var ids = [];
             for (var i = 0; i < orders.length; i++)
             {
@@ -50,8 +47,6 @@ define(function (require) {
                 ids.push(id);
             }
             
-            alert(ids.length);
-            console.log(ids);
 
             orderService.GetOrdersById(ids, (data) =>
             {
@@ -63,7 +58,7 @@ define(function (require) {
                 console.log(orders);
 
                 var items = orders.flatMap(x => x.Items);
-                console.log(items);
+                
                 items.sort((a,b) =>{
                     if ( a.BinRack < b.BinRack ){
                         return -1;
@@ -73,6 +68,7 @@ define(function (require) {
                       }
                       return 0;
                 });
+                console.log(items);
                 
                 printService.GetTemplateList("Stock Item Labels", (data) =>{
                     if(data.error)
@@ -82,7 +78,7 @@ define(function (require) {
                     var templates = data.result;
                     console.log(templates);
                     //need template name
-                    var template = templates.find(t => t.TemplateName == "Test");
+                    var template = templates.find(t => t.TemplateName == TemplateName);
                     printService.CreatePDFfromJobForceTemplate("Stock Item Labels", items.map(i => {return i.StockItemId}), template.pkTemplateRowId, 
                     [{"Key":"IdType","Value":"StockId"},
                     // {"Key":"LocationId", "Value":"00000000-0000-0000-0000-000000000000"}

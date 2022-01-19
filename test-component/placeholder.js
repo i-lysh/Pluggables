@@ -36,8 +36,6 @@ define(function (require) {
             const orderService = new Services.OrdersService(self);
             const printService = new Services.PrintService(self);
 
-            console.log(printService);
-
             if (orders.length < 1) {
                 alert('Please select at least one order');
                 return;

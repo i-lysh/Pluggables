@@ -68,9 +68,11 @@ define(function (require) {
                         if( index < 0)
                         {
                             items.push({StockItemId: item.StockItemId, Quantity: item.Quantity, BinRack: item.BinRack});
-                            continue;
                         }
-                        items[index].Quantity+=item.Quantity;
+                        else
+                        {
+                            items[index].Quantity+=item.Quantity;
+                        }
                     })
                 });
                 

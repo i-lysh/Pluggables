@@ -36,6 +36,8 @@ define(function (require) {
             const orderService = new Services.OrdersService(self);
             const printService = new Services.PrintService(self);
 
+            console.log(printService);
+
             if (orders.length < 1) {
                 alert('Please select at least one order');
                 return;
@@ -58,7 +60,19 @@ define(function (require) {
                 var orders = [];
                 orders = data.result;
 
-                var items = orders.flatMap(x => x.Items);
+                // var items = orders.flatMap(x => x.Items);
+                var items = [];
+                orders.forEach(order => {
+                    order.Items.forEach(item => {
+                        var index = items.findIndex(i => i.StockItemId == item.StockItemId);
+                        if( index < 0)
+                        {
+                            items.push({StockItemId: item.StockItemId, Quantity: item.Quantity, BinRack: item.BinRack});
+                            continue;
+                        }
+                        items[index].Quantity+=item.Quantity;
+                    })
+                });
                 
                 items.sort((a,b) =>{
                     return a.BinRack.localeCompare(b.BinRack, 'en', { numeric: true });

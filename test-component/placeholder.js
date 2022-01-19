@@ -90,9 +90,9 @@ define(function (require) {
 
                     var template = templates.find(t => t.TemplateName == TemplateName);
 
-                    printService.CreatePDFfromJobForceTemplate(
+                    printService.CreatePDFfromJobForceTemplateWithQuantities(
                         "Stock Item Labels", 
-                        items.map(i => {return i.StockItemId}), 
+                        items.map(i => {return {"Key":i.StockItemId, "Value":i.Quantity}}), 
                         template.pkTemplateRowId, 
                         [
                             {"Key":"IdType","Value":"StockId"},

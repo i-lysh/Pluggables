@@ -32,8 +32,8 @@ define(function (require) {
             var orders = $scope.viewStats.get_selected_orders();
             var locationId = $scope.viewStats.LocationId;
             const self = this;
-
-            const orderService = new Services.OpenOrdersService(self);
+            console.log(new Service());
+            const orderService = new Services.OrdersService(self);
             const printService = new Services.PrintService(self);
             console.log(orderService);
             if (orders.length < 1) {

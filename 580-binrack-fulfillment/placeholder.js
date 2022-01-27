@@ -32,7 +32,7 @@ define(function (require) {
             var orders = $scope.viewStats.get_selected_orders();
             var locationId = $scope.viewStats.LocationId;
             const self = this;
-            console.log(new Services());
+            console.log(new Services);
             const orderService = new Services.OrdersService(self);
             const printService = new Services.PrintService(self);
             console.log(orderService);

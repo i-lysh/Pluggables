@@ -48,67 +48,76 @@ define(function (require) {
                 ids.push(id);
             }
             console.log(orderService);
-
-            orderService.GetOrdersById(ids, (data) =>
-            {
-                if(data.error != null){
-                    return;
+            orderService.getOpenOrders(null, null, 
+                {
+                    BooleanFields: [
+                        {Value: true, FieldCode: 'CAN_FULFIL'}
+                    ],
+                    ListFields: ids.map(id => new {Value: id, Type: 'Is', FieldCode: 'GENERAL_INFO_ORDER_ID' })
+                },null,null,null,(data) =>{
+                    console.log(data);
                 }
+            )
+            // orderService.GetOrdersById(ids, (data) =>
+            // {
+            //     if(data.error != null){
+            //         return;
+            //     }
 
-                var orders = [];
-                orders = data.result;
+            //     var orders = [];
+            //     orders = data.result;
 
-                // // var items = orders.flatMap(x => x.Items);
-                // var items = [];
-                // orders.forEach(order => {
-                //     order.Items.forEach(item => {
-                //         var index = items.findIndex(i => i.StockItemId == item.StockItemId);
-                //         if( index < 0)
-                //         {
-                //             items.push({StockItemId: item.StockItemId, Quantity: item.Quantity, BinRack: item.BinRack});
-                //         }
-                //         else
-                //         {
-                //             items[index].Quantity+=item.Quantity;
-                //         }
-                //     })
-                // });
+            //     // // var items = orders.flatMap(x => x.Items);
+            //     // var items = [];
+            //     // orders.forEach(order => {
+            //     //     order.Items.forEach(item => {
+            //     //         var index = items.findIndex(i => i.StockItemId == item.StockItemId);
+            //     //         if( index < 0)
+            //     //         {
+            //     //             items.push({StockItemId: item.StockItemId, Quantity: item.Quantity, BinRack: item.BinRack});
+            //     //         }
+            //     //         else
+            //     //         {
+            //     //             items[index].Quantity+=item.Quantity;
+            //     //         }
+            //     //     })
+            //     // });
                 
-                // items.sort((a,b) =>{
-                //     return a.BinRack.localeCompare(b.BinRack, 'en', { numeric: true });
-                // });
+            //     // items.sort((a,b) =>{
+            //     //     return a.BinRack.localeCompare(b.BinRack, 'en', { numeric: true });
+            //     // });
                 
-                // printService.GetTemplateList("Stock Item Labels", (data) =>{
-                //     if(data.error)
-                //     {
-                //         return;
-                //     }
+            //     // printService.GetTemplateList("Stock Item Labels", (data) =>{
+            //     //     if(data.error)
+            //     //     {
+            //     //         return;
+            //     //     }
 
-                //     var templates = data.result;
+            //     //     var templates = data.result;
 
-                //     var template = templates.find(t => t.TemplateName == TemplateName);
+            //     //     var template = templates.find(t => t.TemplateName == TemplateName);
 
-                //     printService.CreatePDFfromJobForceTemplateWithQuantities(
-                //         "Stock Item Labels", 
-                //         items.map(i => {return {"Key":i.StockItemId, "Value":i.Quantity}}), 
-                //         template.pkTemplateRowId, 
-                //         [
-                //             {"Key":"IdType","Value":"StockId"},
-                //         // {"Key":"LocationId", "Value":"00000000-0000-0000-0000-000000000000"}
-                //         ], 
-                //         null,
-                //         (res) =>{
-                //         if(res.error)
-                //         {
-                //             return;
-                //         }
+            //     //     printService.CreatePDFfromJobForceTemplateWithQuantities(
+            //     //         "Stock Item Labels", 
+            //     //         items.map(i => {return {"Key":i.StockItemId, "Value":i.Quantity}}), 
+            //     //         template.pkTemplateRowId, 
+            //     //         [
+            //     //             {"Key":"IdType","Value":"StockId"},
+            //     //         // {"Key":"LocationId", "Value":"00000000-0000-0000-0000-000000000000"}
+            //     //         ], 
+            //     //         null,
+            //     //         (res) =>{
+            //     //         if(res.error)
+            //     //         {
+            //     //             return;
+            //     //         }
 
-                //         // var result = res.result;
+            //     //         // var result = res.result;
                         
-                //         // printService.OpenPrintDialog(result.URL);
-                //     })
-                // })
-            });
+            //     //         // printService.OpenPrintDialog(result.URL);
+            //     //     })
+            //     // })
+            // });
         };
 
        

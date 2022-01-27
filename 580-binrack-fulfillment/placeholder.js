@@ -48,13 +48,13 @@ define(function (require) {
                 ids.push(id);
             }
             console.log(orderService);
-            orderService.getOpenOrders(null, null, 
+            orderService.getOpenOrders(ids.length, 1, 
                 {
                     BooleanFields: [
-                        {Value: true, FieldCode: 'CAN_FULFIL'}
+                        {Value: true, FieldCode: 108}
                     ],
-                    ListFields: ids.map(id =>  { return {Value: id, Type: 'Is', FieldCode: 'GENERAL_INFO_ORDER_ID' }})
-                },null,null,null,(data) =>{
+                    ListFields: ids.map(id =>  { return {Value: id, Type: 'Is', FieldCode: 2 }})
+                },[],null,'',(data) =>{
                     console.log(data);
                 }
             )

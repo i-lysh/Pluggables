@@ -33,9 +33,9 @@ define(function (require) {
             var locationId = $scope.viewStats.LocationId;
             const self = this;
 
-            const orderService = new Services.OrdersService(self);
+            const orderService = new Services.OpenOrdersService(self);
             const printService = new Services.PrintService(self);
-            // console.log(printService);
+            console.log(orderService);
             if (orders.length < 1) {
                 alert('Please select at least one order');
                 return;
@@ -48,7 +48,7 @@ define(function (require) {
                 ids.push(id);
             }
             console.log(orderService);
-            orderService.getAllOpenOrders( 
+            orderService.getOpenOrders( 
                 {
                     BooleanFields: [ 
                         {Value: true, FieldCode: 108}

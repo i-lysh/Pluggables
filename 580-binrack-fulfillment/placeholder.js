@@ -47,14 +47,14 @@ define(function (require) {
                 var id = orders[i].num_id;
                 ids.push(id);
             }
-            console.log(orderService);
+            // console.log(orderService);
             orderService.getOpenOrders(ids.length, 1, 
                 {
-                    BooleanFields: [
+                    BooleanFields: [ 
                         {Value: true, FieldCode: 108}
                     ],
                     ListFields: ids.map(id =>  { return {Value: id, Type: 0, FieldCode: 2 }})
-                },[],locationId,'',(data) =>{
+                },[],String(locationId),'',(data) =>{
                     console.log(data);
                 }
             )

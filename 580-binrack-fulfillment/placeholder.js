@@ -30,17 +30,17 @@ define(function (require) {
         this.onClick = () => {
 
             var orders = $scope.viewStats.get_selected_orders();
-
+            console.log($scope.viewStats);
             const self = this;
 
             const orderService = new Services.OrdersService(self);
             const printService = new Services.PrintService(self);
-            console.log($element);
+            // console.log(printService);
             if (orders.length < 1) {
                 alert('Please select at least one order');
                 return;
             }
-            console.log(orders);
+            // console.log(orders);
             var ids = [];
             for (var i = 0; i < orders.length; i++)
             {
@@ -50,9 +50,9 @@ define(function (require) {
             console.log(orderService);
             orderService.getOpenOrders(ids.length, 1, 
                 {
-                    // BooleanFields: [
-                    //     {Value: 'true', FieldCode: 108}
-                    // ],
+                    BooleanFields: [
+                        {Value: true, FieldCode: 108}
+                    ],
                     ListFields: ids.map(id =>  { return {Value: id, Type: 0, FieldCode: 2 }})
                 },[],null,'',(data) =>{
                     console.log(data);

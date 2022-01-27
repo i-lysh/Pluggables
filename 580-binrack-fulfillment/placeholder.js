@@ -48,13 +48,13 @@ define(function (require) {
                 ids.push(id);
             }
             console.log(orderService);
-            orderService.getOpenOrders(ids.length, 1, 
+            orderService.getAllOpenOrders( 
                 {
                     // BooleanFields: [ 
                     //     {Value: true, FieldCode: 108}
                     // ],
                     ListFields: ids.map(id =>  { return {Value: id, Type: 0, FieldCode: 2 }})
-                },[],locationId,'none',(data) =>{
+                },[],locationId,'',(data) =>{
                     console.log(data);
                 }
             )

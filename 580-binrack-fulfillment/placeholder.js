@@ -47,7 +47,7 @@ define(function (require) {
                 var id = orders[i].num_id;
                 ids.push(id);
             }
-            // console.log(orderService);
+            console.log(orderService);
             orderService.getOpenOrders(ids.length, 1, 
                 {
                     // BooleanFields: [ 

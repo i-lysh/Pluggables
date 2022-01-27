@@ -40,7 +40,7 @@ define(function (require) {
                 alert('Please select at least one order');
                 return;
             }
-
+            console.log(orders);
             var ids = [];
             for (var i = 0; i < orders.length; i++)
             {
@@ -53,7 +53,7 @@ define(function (require) {
                     BooleanFields: [
                         {Value: true, FieldCode: 108}
                     ],
-                    //TextFields: ids.map(id =>  { return {Value: id, Type: 0, FieldCode: 2 }})
+                    ListFields: ids.map(id =>  { return {Value: id, Type: 0, FieldCode: 2 }})
                 },[],null,'',(data) =>{
                     console.log(data);
                 }

@@ -44,7 +44,7 @@ define(function (require) {
             var ids = [];
             for (var i = 0; i < orders.length; i++)
             {
-                var id = orders[i].num_id;
+                var id = orders[i].id;
                 ids.push(id);
             }
             console.log(orderService);
@@ -66,6 +66,12 @@ define(function (require) {
 
             //     var orders = [];
             //     orders = data.result;
+
+            //     orders = [].filter((o) => {
+            //         if(o.Items.some( i => {
+
+            //         }))
+            //     })
 
             //     // // var items = orders.flatMap(x => x.Items);
             //     // var items = [];
@@ -117,8 +123,8 @@ define(function (require) {
             //     //         // printService.OpenPrintDialog(result.URL);
             //     //     })
             //     // })
-            // });
-        };
+    //         });
+    //     };
 
        
     };

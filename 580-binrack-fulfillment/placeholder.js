@@ -51,9 +51,9 @@ define(function (require) {
             orderService.getOpenOrders(ids.length, 1, 
                 {
                     BooleanFields: [
-                        {Value: true, FieldCode: 108}
+                        {Value: 'true', FieldCode: 108}
                     ],
-                    ListFields: [...ids.map(id =>  { return {Value: id, Type: 0, FieldCode: 2 }}),{Value: true, Type: 0, FieldCode:108}]
+                    ListFields: ids.map(id =>  { return {Value: id, Type: 0, FieldCode: 2 }})
                 },[],null,'',(data) =>{
                     console.log(data);
                 }

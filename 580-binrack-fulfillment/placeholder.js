@@ -54,7 +54,7 @@ define(function (require) {
                         {Value: true, FieldCode: 108}
                     ],
                     ListFields: ids.map(id =>  { return {Value: id, Type: 0, FieldCode: 2 }})
-                },[],String(locationId),'',(data) =>{
+                },[{FieldCode: 97, Direction: 1, Order: 1}],''+locationId,'',(data) =>{
                     console.log(data);
                 }
             )

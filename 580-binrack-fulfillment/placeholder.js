@@ -53,7 +53,7 @@ define(function (require) {
                     BooleanFields: [
                         {Value: true, FieldCode: 'CAN_FULFIL'}
                     ],
-                    ListFields: ids.map(id => new {Value: id, Type: 'Is', FieldCode: 'GENERAL_INFO_ORDER_ID' })
+                    ListFields: ids.map(id =>  { return {Value: id, Type: 'Is', FieldCode: 'GENERAL_INFO_ORDER_ID' }})
                 },null,null,null,(data) =>{
                     console.log(data);
                 }

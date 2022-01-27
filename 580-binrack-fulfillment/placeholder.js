@@ -44,7 +44,7 @@ define(function (require) {
             var ids = [];
             for (var i = 0; i < orders.length; i++)
             {
-                var id = orders[i].id;
+                var id = orders[i].num_id;
                 ids.push(id);
             }
             console.log(orderService);

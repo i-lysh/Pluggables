@@ -30,7 +30,7 @@ define(function (require) {
         this.onClick = () => {
 
             var orders = $scope.viewStats.get_selected_orders();
-            console.log($scope.viewStats);
+            var locationId = $scope.viewStats.LocationId;
             const self = this;
 
             const orderService = new Services.OrdersService(self);
@@ -54,7 +54,7 @@ define(function (require) {
                         {Value: true, FieldCode: 108}
                     ],
                     ListFields: ids.map(id =>  { return {Value: id, Type: 0, FieldCode: 2 }})
-                },[],null,'',(data) =>{
+                },[],locationId,'',(data) =>{
                     console.log(data);
                 }
             )

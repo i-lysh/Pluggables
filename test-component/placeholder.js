@@ -4,19 +4,19 @@ define(function (require) {
     const placeholderManager = require("core/placeholderManager");
 
     var docDefinition;
-    const TemplateName = "Test";
+    const TemplateName = "Passport";
 
     var placeHolder = function ($scope, $element, controlService) {
 
         //const _this = this;
         this.getItems = () => {
             var items = [{
-                text: "Test Button",  // Button name
-                key: "placeholderTestButton",  // Button id (unique)
+                text: "Print Labels",  // Button name
+                key: "placeholderPrintLabelsButton",  // Button id (unique)
                 icon: "fa fa-print",  // Button icon
                 content: {
-                    moduleName: "placeholderTestButtonTemplate",
-                    controlName: "placeholderTestButtonTemplate"
+                    moduleName: "placeholderPrintLabelsButtonTemplate",
+                    controlName: "placeholderPrintLabelsButtonTemplate"
                 }
             }];
 
@@ -103,9 +103,9 @@ define(function (require) {
                             return;
                         }
 
-                        var result = res.result;
+                        // var result = res.result;
                         
-                        printService.OpenPrintDialog(result.URL);
+                        // printService.OpenPrintDialog(result.URL);
                     })
                 })
             });

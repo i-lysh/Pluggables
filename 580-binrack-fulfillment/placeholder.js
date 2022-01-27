@@ -53,7 +53,7 @@ define(function (require) {
                     BooleanFields: [
                         {Value: true, FieldCode: 108}
                     ],
-                    TextFields: ids.map(id =>  { return {Value: id, Type: 0, FieldCode: 2 }})
+                    //TextFields: ids.map(id =>  { return {Value: id, Type: 0, FieldCode: 2 }})
                 },[],null,'',(data) =>{
                     console.log(data);
                 }

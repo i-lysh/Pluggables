@@ -50,9 +50,9 @@ define(function (require) {
             console.log(orderService);
             orderService.getAllOpenOrders( 
                 {
-                    // BooleanFields: [ 
-                    //     {Value: true, FieldCode: 108}
-                    // ],
+                    BooleanFields: [ 
+                        {Value: true, FieldCode: 108}
+                    ],
                     ListFields: ids.map(id =>  { return {Value: id, Type: 0, FieldCode: 2 }})
                 },[],locationId,'',(data) =>{
                     console.log(data);

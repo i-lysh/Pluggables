@@ -32,11 +32,11 @@ define(function (require) {
             var orders = $scope.viewStats.get_selected_orders();
             var locationId = $scope.viewStats.LocationId;
             const self = this;
-            console.log(openOrdersService);
+            // console.log(openOrdersService);
             const orderService = new Services.OrdersService(self);
             const printService = new Services.PrintService(self);
             const macroService = new Services.MacroService(self);
-            console.log(printService);
+            // console.log(printService);
             if (orders.length < 1) {
                 alert('Please select at least one order');
                 return;
@@ -51,7 +51,12 @@ define(function (require) {
 
             var obj = {applicationName: '580_Test_Pluggable',  macroName: '580_Test_Macro', orderIds: ids, templateType: 'Pick List', templateName: 'Test'};
             macroService.Run(obj, (data) => {
-                console.log(data);
+                if(data.result && data.result.IsError)
+                {
+                    console.log(data.result.ErrorString);
+                    return;
+                }
+                printService.OpenPrintDialog(data.result.URL);
             })
             // console.log(orderService);
             // orderService.getOpenOrders( 

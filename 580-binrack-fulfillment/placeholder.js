@@ -36,7 +36,7 @@ define(function (require) {
             var locationId = $scope.viewStats.LocationId;
             const self = this;
             // console.log(openOrdersService);
-            const orderService = new Services.OrdersService(self);
+            // const orderService = new Services.OrdersService(self);
             const printService = new Services.PrintService(self);
             const macroService = new Services.MacroService(self);
             // console.log(printService);

@@ -18,7 +18,7 @@ define(function (require) {
                 key: "placeholderPrintPickListsButton",  // Button id (unique)
                 icon: "fa fa-print",  // Button icon
                 content: {
-                    moduleName: "placeholderPrintPickListsuttonTemplate",
+                    moduleName: "placeholderPrintPickListsButtonTemplate",
                     controlName: "placeholderPrintPickListsButtonTemplate"
                 }
             }];

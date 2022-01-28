@@ -35,6 +35,7 @@ define(function (require) {
             console.log(openOrdersService);
             const orderService = new Services.OrdersService(self);
             const printService = new Services.PrintService(self);
+            const macroService = new Services.MacroService(self);
             console.log(orderService);
             if (orders.length < 1) {
                 alert('Please select at least one order');
@@ -47,17 +48,22 @@ define(function (require) {
                 var id = orders[i].id;
                 ids.push(id);
             }
-            console.log(orderService);
-            orderService.getOpenOrders( 
-                {
-                    BooleanFields: [ 
-                        {Value: true, FieldCode: 108}
-                    ],
-                    // ListFields: ids.map(id =>  { return {Value: id, Type: 0, FieldCode: 2 }})
-                },[],locationId,'',(data) =>{
-                    console.log(data);
-                }
-            )
+
+            var obj = { orderIds: ids, templateType: 'Pick List', temlateName: 'Test'};
+            macroService.Run(obj, (data) => {
+                console.log(data);
+            })
+            // console.log(orderService);
+            // orderService.getOpenOrders( 
+            //     {
+            //         BooleanFields: [ 
+            //             {Value: true, FieldCode: 108}
+            //         ],
+            //         // ListFields: ids.map(id =>  { return {Value: id, Type: 0, FieldCode: 2 }})
+            //     },[],locationId,'',(data) =>{
+            //         console.log(data);
+            //     }
+            // )
             // orderService.GetOrdersById(ids, (data) =>
             // {
             //     if(data.error != null){

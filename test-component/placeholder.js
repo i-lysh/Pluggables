@@ -91,7 +91,7 @@ define(function (require) {
                     printService.CreatePDFfromJobForceTemplateWithQuantities(
                         "Stock Item Labels", 
                         items.map(i => {return {"Key":i.StockItemId, "Value":i.Quantity}}), 
-                        template.pkTemplateRowId, 
+                        template? template.pkTemplateRowId : null, 
                         [
                             {"Key":"IdType","Value":"StockId"},
                         // {"Key":"LocationId", "Value":"00000000-0000-0000-0000-000000000000"}

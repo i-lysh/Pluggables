@@ -36,7 +36,7 @@ define(function (require) {
             const orderService = new Services.OrdersService(self);
             const printService = new Services.PrintService(self);
             const macroService = new Services.MacroService(self);
-            console.log(orderService);
+            console.log(printService);
             if (orders.length < 1) {
                 alert('Please select at least one order');
                 return;
@@ -49,7 +49,7 @@ define(function (require) {
                 ids.push(id);
             }
 
-            var obj = { orderIds: ids, templateType: 'Pick List', temlateName: 'Test'};
+            var obj = {applicationName: '580_Test_Pluggable',  macroName: '580_Test_Macro', orderIds: ids, templateType: 'Pick List', templateName: 'Test'};
             macroService.Run(obj, (data) => {
                 console.log(data);
             })

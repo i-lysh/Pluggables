@@ -4,19 +4,22 @@ define(function (require) {
     const placeholderManager = require("core/placeholderManager");
 
     var docDefinition;
-    const TemplateName = "Label Template";
+    const TemplateName = "Pick List Template";
+    const TemplateType = "Pick List";
+    const ApplicationName = "580_Test_Pluggable";
+    const MacroName = "580_Test_Macro";
 
     var placeHolder = function ($scope, $element, controlService) {
 
         //const _this = this;
         this.getItems = () => {
             var items = [{
-                text: "Print Labels 2",  // Button name
-                key: "placeholderPrintLabels2Button",  // Button id (unique)
+                text: "Print Pick Lists",  // Button name
+                key: "placeholderPrintPickListsButton",  // Button id (unique)
                 icon: "fa fa-print",  // Button icon
                 content: {
-                    moduleName: "placeholderPrintLabelsButton2Template",
-                    controlName: "placeholderPrintLabelsButton2Template"
+                    moduleName: "placeholderPrintPickListsuttonTemplate",
+                    controlName: "placeholderPrintPickListsButtonTemplate"
                 }
             }];
 
@@ -49,7 +52,12 @@ define(function (require) {
                 ids.push(id);
             }
 
-            var obj = {applicationName: '580_Test_Pluggable',  macroName: '580_Test_Macro', orderIds: ids, templateType: 'Pick List', templateName: 'Test'};
+            var obj = {
+                applicationName: ApplicationName,  
+                macroName: MacroName, 
+                orderIds: ids,
+                templateType: TemplateType,
+                templateName: TemplateName};
             macroService.Run(obj, (data) => {
                 if(data.result && data.result.IsError)
                 {
@@ -58,83 +66,6 @@ define(function (require) {
                 }
                 printService.OpenPrintDialog(data.result.URL);
             })
-            // console.log(orderService);
-            // orderService.getOpenOrders( 
-            //     {
-            //         BooleanFields: [ 
-            //             {Value: true, FieldCode: 108}
-            //         ],
-            //         // ListFields: ids.map(id =>  { return {Value: id, Type: 0, FieldCode: 2 }})
-            //     },[],locationId,'',(data) =>{
-            //         console.log(data);
-            //     }
-            // )
-            // orderService.GetOrdersById(ids, (data) =>
-            // {
-            //     if(data.error != null){
-            //         return;
-            //     }
-
-            //     var orders = [];
-            //     orders = data.result;
-
-            //     orders = [].filter((o) => {
-            //         if(o.Items.some( i => {
-
-            //         }))
-            //     })
-
-            //     // // var items = orders.flatMap(x => x.Items);
-            //     // var items = [];
-            //     // orders.forEach(order => {
-            //     //     order.Items.forEach(item => {
-            //     //         var index = items.findIndex(i => i.StockItemId == item.StockItemId);
-            //     //         if( index < 0)
-            //     //         {
-            //     //             items.push({StockItemId: item.StockItemId, Quantity: item.Quantity, BinRack: item.BinRack});
-            //     //         }
-            //     //         else
-            //     //         {
-            //     //             items[index].Quantity+=item.Quantity;
-            //     //         }
-            //     //     })
-            //     // });
-                
-            //     // items.sort((a,b) =>{
-            //     //     return a.BinRack.localeCompare(b.BinRack, 'en', { numeric: true });
-            //     // });
-                
-            //     // printService.GetTemplateList("Stock Item Labels", (data) =>{
-            //     //     if(data.error)
-            //     //     {
-            //     //         return;
-            //     //     }
-
-            //     //     var templates = data.result;
-
-            //     //     var template = templates.find(t => t.TemplateName == TemplateName);
-
-            //     //     printService.CreatePDFfromJobForceTemplateWithQuantities(
-            //     //         "Stock Item Labels", 
-            //     //         items.map(i => {return {"Key":i.StockItemId, "Value":i.Quantity}}), 
-            //     //         template.pkTemplateRowId, 
-            //     //         [
-            //     //             {"Key":"IdType","Value":"StockId"},
-            //     //         // {"Key":"LocationId", "Value":"00000000-0000-0000-0000-000000000000"}
-            //     //         ], 
-            //     //         null,
-            //     //         (res) =>{
-            //     //         if(res.error)
-            //     //         {
-            //     //             return;
-            //     //         }
-
-            //     //         // var result = res.result;
-                        
-            //     //         // printService.OpenPrintDialog(result.URL);
-            //     //     })
-            //     // })
-    //         });
         };
 
        

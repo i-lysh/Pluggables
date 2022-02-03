@@ -9,7 +9,7 @@ define(function (require) {
     const ApplicationName = "580_Test_Pluggable";
     const MacroName = "580_Test_Macro";
 
-    var placeHolder = function ($scope, $element, controlService) {
+    var placeHolder = function ($scope, $element, controlService, openOrdersService) {
 
         //const _this = this;
         this.getItems = () => {
@@ -31,7 +31,7 @@ define(function (require) {
         };
 
         this.onClick = () => {
-
+            console.log(openOrdersService);
             var orders = $scope.viewStats.get_selected_orders();
             var locationId = $scope.viewStats.LocationId;
             const self = this;

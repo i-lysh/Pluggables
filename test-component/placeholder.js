@@ -6,7 +6,7 @@ define(function (require) {
     var docDefinition;
     const TemplateName = "Passport";
 
-    var placeHolder = function ($scope, $element, controlService, openOrdersService) {
+    var placeHolder = function ($scope, $element, controlService) {
 
         //const _this = this;
         this.getItems = () => {
@@ -28,7 +28,7 @@ define(function (require) {
         };
 
         this.onClick = () => {
-            console.log(openOrdersService);
+
             var orders = $scope.viewStats.get_selected_orders();
 
             const self = this;

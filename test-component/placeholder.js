@@ -54,7 +54,7 @@ define(function (require) {
             for(let i = 0; i<pages; i++)
             {
                 
-                await orderService.GetOrdersById(ids.filter((o, ind) => ind >= i*200 && ind < (i+1)*200), (data) => {
+                orderService.GetOrdersById(ids.filter((o, ind) => ind >= i*200 && ind < (i+1)*200), (data) => {
                     if(data.error != null){
                         return;
                     }
@@ -77,7 +77,7 @@ define(function (require) {
                             }
                         })
                     });
-                });
+                }).then((i) => {console.log(i);});
             }
             console.log(items);
 

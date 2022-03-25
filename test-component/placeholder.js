@@ -48,25 +48,25 @@ define(function (require) {
                 ids.push(id);
             }
             
-            var pages = ids.length % 200>0 ? parseInt(ids.length/200) : parseInt(ids.length/200)+1;
+            let pages = ids.length % 200>0 ? parseInt(ids.length/200) : parseInt(ids.length/200)+1;
             // var file;
-            var items = [];
-            for(var i = 0; i<pages; i++)
+            let items = [];
+            for(let i = 0; i<pages; i++)
             {
                 
-                var data = await orderService.GetOrdersById(ids.filter((o, ind) => ind >= i*200 && ind < (i+1)*200), (data) => {
+                orderService.GetOrdersById(ids.filter((o, ind) => ind >= i*200 && ind < (i+1)*200), (data) => {
                     if(data.error != null){
                         return;
                     }
     
-                    var orders = [];
+                    let orders = [];
                     orders = data.result;
     
                     // var items = orders.flatMap(x => x.Items);
                     // var items = [];
                     orders.forEach(order => {
                         order.Items.forEach(item => {
-                            var index = items.findIndex(i => i.StockItemId == item.StockItemId);
+                            let index = items.findIndex(i => i.StockItemId == item.StockItemId);
                             if( index < 0)
                             {
                                 items.push({StockItemId: item.StockItemId, Quantity: item.Quantity, BinRack: item.BinRack});
@@ -78,7 +78,6 @@ define(function (require) {
                         })
                     });
                 });
-                console.log(data);
             }
             console.log(items);
 

@@ -11,12 +11,12 @@ define(function (require) {
         //const _this = this;
         this.getItems = () => {
             var items = [{
-                text: "TEST Print Labels",  // Button name
-                key: "placeholderTESTPrintLabelsButton",  // Button id (unique)
+                text: "Print Labels",  // Button name
+                key: "placeholderPrintLabelsButton",  // Button id (unique)
                 icon: "fa fa-print",  // Button icon
                 content: {
-                    moduleName: "placeholderTESTPrintLabelsButtonTemplate",
-                    controlName: "placeholderTESTPrintLabelsButtonTemplate"
+                    moduleName: "placeholderPrintLabelsButtonTemplate",
+                    controlName: "placeholderPrintLabelsButtonTemplate"
                 }
             }];
 
@@ -48,7 +48,7 @@ define(function (require) {
                 ids.push(id);
             }
             
-            let pages = ids.length % 200>0 ? parseInt(ids.length/200) : parseInt(ids.length/200)+1;
+            let pages = ids.length % 200>0 ? parseInt(ids.length/200)+1 : parseInt(ids.length/200);
             // var file;
             let items = [];
             let promises = [];
@@ -121,35 +121,6 @@ define(function (require) {
                     })
                 })
             })
-
-
-            // orderService.GetOrdersById(ids, (data) =>
-            // {
-            //     if(data.error != null){
-            //         return;
-            //     }
-
-            //     var orders = [];
-            //     orders = data.result;
-
-            //     // var items = orders.flatMap(x => x.Items);
-            //     var items = [];
-            //     orders.forEach(order => {
-            //         order.Items.forEach(item => {
-            //             var index = items.findIndex(i => i.StockItemId == item.StockItemId);
-            //             if( index < 0)
-            //             {
-            //                 items.push({StockItemId: item.StockItemId, Quantity: item.Quantity, BinRack: item.BinRack});
-            //             }
-            //             else
-            //             {
-            //                 items[index].Quantity+=item.Quantity;
-            //             }
-            //         })
-            //     });
-                
-                
-            // });
         };
 
        

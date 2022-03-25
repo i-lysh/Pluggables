@@ -48,67 +48,98 @@ define(function (require) {
                 ids.push(id);
             }
             
-
-            orderService.GetOrdersById(ids, (data) =>
+            var pages = ids.length % 200>0 ? parseInt(ids.length/200) : parseInt(ids.length/200)+1;
+            // var file;
+            var items = [];
+            for(var i = 0; i<pages; i++)
             {
-                if(data.error != null){
-                    return;
-                }
-
-                var orders = [];
-                orders = data.result;
-
-                // var items = orders.flatMap(x => x.Items);
-                var items = [];
-                orders.forEach(order => {
-                    order.Items.forEach(item => {
-                        var index = items.findIndex(i => i.StockItemId == item.StockItemId);
-                        if( index < 0)
-                        {
-                            items.push({StockItemId: item.StockItemId, Quantity: item.Quantity, BinRack: item.BinRack});
-                        }
-                        else
-                        {
-                            items[index].Quantity+=item.Quantity;
-                        }
-                    })
-                });
-                
-                items.sort((a,b) =>{
-                    return a.BinRack.localeCompare(b.BinRack, 'en', { numeric: true });
-                });
-                
-                printService.GetTemplateList("Stock Item Labels", (data) =>{
-                    if(data.error)
-                    {
+                orderService.GetOrdersById(ids.filter((o, ind) => ind >= i*200 && ind < (i+1)*200), (data) => {
+                    if(data.error != null){
                         return;
                     }
+    
+                    var orders = [];
+                    orders = data.result;
+    
+                    // var items = orders.flatMap(x => x.Items);
+                    // var items = [];
+                    orders.forEach(order => {
+                        order.Items.forEach(item => {
+                            var index = items.findIndex(i => i.StockItemId == item.StockItemId);
+                            if( index < 0)
+                            {
+                                items.push({StockItemId: item.StockItemId, Quantity: item.Quantity, BinRack: item.BinRack});
+                            }
+                            else
+                            {
+                                items[index].Quantity+=item.Quantity;
+                            }
+                        })
+                    });
+                });
+            }
+            console.log(items);
 
-                    var templates = data.result;
+            // orderService.GetOrdersById(ids, (data) =>
+            // {
+            //     if(data.error != null){
+            //         return;
+            //     }
 
-                    var template = templates.find(t => t.TemplateName == TemplateName);
+            //     var orders = [];
+            //     orders = data.result;
 
-                    printService.CreatePDFfromJobForceTemplateWithQuantities(
-                        "Stock Item Labels", 
-                        items.map(i => {return {"Key":i.StockItemId, "Value":i.Quantity}}), 
-                        template? template.pkTemplateRowId : null, 
-                        [
-                            {"Key":"IdType","Value":"StockId"},
-                        // {"Key":"LocationId", "Value":"00000000-0000-0000-0000-000000000000"}
-                        ], 
-                        null,
-                        (res) =>{
-                        if(res.error)
-                        {
-                            return;
-                        }
+            //     // var items = orders.flatMap(x => x.Items);
+            //     var items = [];
+            //     orders.forEach(order => {
+            //         order.Items.forEach(item => {
+            //             var index = items.findIndex(i => i.StockItemId == item.StockItemId);
+            //             if( index < 0)
+            //             {
+            //                 items.push({StockItemId: item.StockItemId, Quantity: item.Quantity, BinRack: item.BinRack});
+            //             }
+            //             else
+            //             {
+            //                 items[index].Quantity+=item.Quantity;
+            //             }
+            //         })
+            //     });
+                
+            //     items.sort((a,b) =>{
+            //         return a.BinRack.localeCompare(b.BinRack, 'en', { numeric: true });
+            //     });
+                
+            //     printService.GetTemplateList("Stock Item Labels", (data) =>{
+            //         if(data.error)
+            //         {
+            //             return;
+            //         }
 
-                        // var result = res.result;
+            //         var templates = data.result;
+
+            //         var template = templates.find(t => t.TemplateName == TemplateName);
+
+            //         printService.CreatePDFfromJobForceTemplateWithQuantities(
+            //             "Stock Item Labels", 
+            //             items.map(i => {return {"Key":i.StockItemId, "Value":i.Quantity}}), 
+            //             template? template.pkTemplateRowId : null, 
+            //             [
+            //                 {"Key":"IdType","Value":"StockId"},
+            //             // {"Key":"LocationId", "Value":"00000000-0000-0000-0000-000000000000"}
+            //             ], 
+            //             null,
+            //             (res) =>{
+            //             if(res.error)
+            //             {
+            //                 return;
+            //             }
+
+            //             // var result = res.result;
                         
-                        // printService.OpenPrintDialog(result.URL);
-                    })
-                })
-            });
+            //             // printService.OpenPrintDialog(result.URL);
+            //         })
+            //     })
+            // });
         };
 
        

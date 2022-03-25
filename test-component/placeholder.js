@@ -11,12 +11,12 @@ define(function (require) {
         //const _this = this;
         this.getItems = () => {
             var items = [{
-                text: "Print Labels",  // Button name
-                key: "placeholderPrintLabelsButton",  // Button id (unique)
+                text: "TEST Print Labels",  // Button name
+                key: "placeholderTESTPrintLabelsButton",  // Button id (unique)
                 icon: "fa fa-print",  // Button icon
                 content: {
-                    moduleName: "placeholderPrintLabelsButtonTemplate",
-                    controlName: "placeholderPrintLabelsButtonTemplate"
+                    moduleName: "placeholderTESTPrintLabelsButtonTemplate",
+                    controlName: "placeholderTESTPrintLabelsButtonTemplate"
                 }
             }];
 

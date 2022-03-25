@@ -53,7 +53,8 @@ define(function (require) {
             var items = [];
             for(var i = 0; i<pages; i++)
             {
-                orderService.GetOrdersById(ids.filter((o, ind) => ind >= i*200 && ind < (i+1)*200), (data) => {
+                
+                var data = await orderService.GetOrdersById(ids.filter((o, ind) => ind >= i*200 && ind < (i+1)*200), (data) => {
                     if(data.error != null){
                         return;
                     }
@@ -77,6 +78,7 @@ define(function (require) {
                         })
                     });
                 });
+                console.log(data);
             }
             console.log(items);
 

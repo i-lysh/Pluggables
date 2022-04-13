@@ -26,11 +26,9 @@ define(function (require) {
         this.isEnabled = (itemKey) => {
             return true;
         };
-        this.isLoading = (itemKey) => {
-            return fasle;
-        };
 
         this.onClick = () => {
+            this.isEnabled = () => false;
 
             var orders = $scope.viewStats.get_selected_orders();
 
@@ -41,6 +39,7 @@ define(function (require) {
 
             if (orders.length < 1) {
                 alert('Please select at least one order');
+                this.isEnabled = () => true;
                 return;
             }
 
@@ -60,7 +59,8 @@ define(function (require) {
                 let p = new Promise((resolved, rejected) => {
                     orderService.GetOrdersById(ids.filter((o, ind) => ind >= i*200 && ind < (i+1)*200), (data) => {
                         if(data.error != null){
-                            return;
+                            console.log(data.error);
+                            resolved();
                         }
         
                         let orders = [];
@@ -96,6 +96,8 @@ define(function (require) {
                 printService.GetTemplateList("Stock Item Labels", (data) =>{
                     if(data.error)
                     {
+                        this.isEnabled = () => true;
+                        console.log(data.error);
                         return;
                     }
 
@@ -113,8 +115,10 @@ define(function (require) {
                         ], 
                         null,
                         (res) =>{
+                        this.isEnabled = () => true;
                         if(res.error)
                         {
+                            console.log(res.error);
                             return;
                         }
 

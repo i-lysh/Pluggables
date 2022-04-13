@@ -26,6 +26,9 @@ define(function (require) {
         this.isEnabled = (itemKey) => {
             return true;
         };
+        this.isLoading = (itemKey) => {
+            return fasle;
+        };
 
         this.onClick = () => {
 

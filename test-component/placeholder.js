@@ -5,10 +5,11 @@ define(function (require) {
 
     var docDefinition;
     const TemplateName = "Passport";
-    const Window = require("core/Window");
+    //const Window = require("core/Window");
 
     var placeHolder = function ($scope, $element, controlService) {
-
+        console.log(window);
+        console.log($scope);
         //const _this = this;
         this.getItems = () => {
             var items = [{

@@ -2,15 +2,32 @@
 
 define(function (require) {
     const placeholderManager = require("core/placeholderManager");
-
+    const moment = require('https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/moment.min.js');
     var docDefinition;
     const TemplateName = "Passport";
     //const Window = require("core/Window");
 
     var placeHolder = function ($scope, $element, controlService) {
-        console.log(window);
-        console.log($scope);
+        // var input = document.createElement() 
+        // document.getElementsByClassName("")[0].append();
+        // console.log();
+        // console.log($scope);
         //const _this = this;
+        //var row = angular.element(document.getElementsByClassName("navigation-item tight"));
+        // var row = angular.element('lw-extension-directive');
+        // var element = row[0];
+        // //console.log(row[2]);
+
+        // var container = document.getElementsByClassName("legacy-windows-container");
+        // container.innerHTML = `
+        // <div class="lwControlBackDrop"> </div>
+        // <div class="lwControl dynamic" style="left: 289px; top: 84px;">
+        //     <div class="content">
+        //         <content>
+        //         </content>
+        //     </div>
+        // </div>`;
+            
         this.getItems = () => {
             var items = [{
                 text: "Print Labels",  // Button name

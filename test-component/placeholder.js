@@ -48,6 +48,54 @@ define(function (require) {
 
         this.onClick = () => {
             console.log(moment());
+
+            var row = angular.element('legacy-windows-container');
+            var $div = $(row[0]);
+                    $div.daterangepicker({
+                alwaysShowCalendars: true,
+                showDate: true,
+                opens: 'left',
+                maxDate: "0",
+                autoApply: true,
+                ranges: {
+                    'Today': [moment(), moment()],
+                    'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                    'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                    'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                    'This Month': [moment().startOf('month'), moment().endOf('month')],
+                    'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                }
+            }, function (from, to) {
+                // if (($scope.dateFilter.fromDate === null || $scope.dateFilter.fromDate.toISOString() !== from.toISOString()) || ($scope.dateFilter.toDate === null || $scope.dateFilter.toDate.toISOString() !== to.toISOString())) {
+                //     $scope.dateFilter.fromDate = from;
+                //     $scope.dateFilter.toDate = to;
+                //     $scope.updateFilters();
+                // }
+                console.log("some function");
+            });
+
+            const picker = $div.data("daterangepicker");
+            $div.off("click.daterangepicker");
+            $div.on("show.daterangepicker", function () {
+                picker.container.appendTo($div);
+                $(document).off('.daterangepicker');
+                $(window).off('.daterangepicker');
+
+                picker.hide = function () {
+                    if (!this.endDate) {
+                        this.startDate = this.oldStartDate.clone();
+                        this.endDate = this.oldEndDate.clone();
+                    }
+
+                    if ((!this.startDate.isSame(this.oldStartDate) || !this.endDate.isSame(this.oldEndDate)) || this.startDate.format('LL') === this.endDate.format('LL'))
+                        this.callback(this.startDate, this.endDate, this.chosenLabel);
+
+                    this.updateCalendars();
+                    this.updateElement();
+                };
+            });
+
+            picker.show();
             this.isEnabled = () => false;
 
             var orders = $scope.viewStats.get_selected_orders();

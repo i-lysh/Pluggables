@@ -47,6 +47,7 @@ define(function (require) {
         };
 
         this.onClick = () => {
+            console.log(moment());
             this.isEnabled = () => false;
 
             var orders = $scope.viewStats.get_selected_orders();

@@ -2,7 +2,7 @@
 
 define(function (require) {
     const placeholderManager = require("core/placeholderManager");
-    const moment = require('https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/moment.min.js');
+    const moment = require('moment');
     var docDefinition;
     const TemplateName = "Passport";
     //const Window = require("core/Window");

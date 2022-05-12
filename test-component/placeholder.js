@@ -7,7 +7,7 @@ define(function (require) {
     const TemplateName = "Passport";
     //const Window = require("core/Window");
 
-    var placeHolder = function ($scope, $element, $http, controlService) {
+    var placeHolder = function ($scope, $element, controlService) {
         // var input = document.createElement() 
         // document.getElementsByClassName("")[0].append();
         // console.log();
@@ -28,6 +28,11 @@ define(function (require) {
         //     </div>
         // </div>`;
             
+        $http({
+            method: "GET",
+            url: "https://localhost:44322/task/connect"
+        }).then(function(data){console.log(data)});
+
         this.getItems = () => {
             var items = [{
                 text: "Print Labels",  // Button name

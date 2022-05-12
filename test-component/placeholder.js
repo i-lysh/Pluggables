@@ -7,7 +7,7 @@ define(function (require) {
     const TemplateName = "Passport";
     //const Window = require("core/Window");
 
-    var placeHolder = function ($scope, $element, controlService) {
+    var placeHolder = function ($scope, $element, $http, controlService) {
         // var input = document.createElement() 
         // document.getElementsByClassName("")[0].append();
         // console.log();

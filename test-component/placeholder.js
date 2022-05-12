@@ -49,8 +49,17 @@ define(function (require) {
         this.onClick = () => {
             console.log(moment());
 
-            var row = angular.element('legacy-windows-container');
-            var $div = $(row[0]);
+var row = angular.element('.legacy-windows-container');
+                row[0].innerHTML = `<div class="lwControlBackDrop"> </div>
+        <div class="lwControl dynamic" style="left: 289px; top: 84px;">
+            <div class="content">
+                <content id="pluggableForm">
+<input id="daterangepicker"/>
+                </content>
+            </div>
+        </div>`;
+                row = angular.element('#daterangepicker');
+                var $div = $(row[0]);
                     $div.daterangepicker({
                 alwaysShowCalendars: true,
                 showDate: true,
@@ -73,29 +82,58 @@ define(function (require) {
                 // }
                 console.log("some function");
             });
+                $div.trigger("click");
+                // picker.style.display ="none";
+            // $div.off("click.daterangepicker");
+            // $div.on("show.daterangepicker", function () {
+        //picker.container.appendTo($div);
+        var closeBtn = document.createElement("Button");
+        closeBtn.onclick = function () {
+                var row = angular.element('.legacy-windows-container');
+                row[0].innerHTML = "";
+                const picker = $div.data("daterangepicker");
+                picker.remove();
+                return;
+        }; 
+        closeBtn.innerHTML = "Close";
 
-            const picker = $div.data("daterangepicker");
-            $div.off("click.daterangepicker");
-            $div.on("show.daterangepicker", function () {
-                picker.container.appendTo($div);
-                $(document).off('.daterangepicker');
-                $(window).off('.daterangepicker');
+        var doBtn = document.createElement("Button");
+        doBtn.onclick = function () {
+                // const self = this;
+                
+            // const orderService = new Services.OrdersService(self);
+            //     console.log(orderService);
+        }; 
+        doBtn.innerHTML = "Create reports";
+        var content = document.getElementById("pluggableForm");
+                
+                
+        content.append(closeBtn);
+        content.append(doBtn);
 
-                picker.hide = function () {
-                    if (!this.endDate) {
-                        this.startDate = this.oldStartDate.clone();
-                        this.endDate = this.oldEndDate.clone();
-                    }
 
-                    if ((!this.startDate.isSame(this.oldStartDate) || !this.endDate.isSame(this.oldEndDate)) || this.startDate.format('LL') === this.endDate.format('LL'))
-                        this.callback(this.startDate, this.endDate, this.chosenLabel);
+            // const picker = $div.data("daterangepicker");
+            // $div.off("click.daterangepicker");
+            // $div.on("show.daterangepicker", function () {
+            //     picker.container.appendTo($div);
+            //     $(document).off('.daterangepicker');
+            //     $(window).off('.daterangepicker');
 
-                    this.updateCalendars();
-                    this.updateElement();
-                };
-            });
+            //     picker.hide = function () {
+            //         if (!this.endDate) {
+            //             this.startDate = this.oldStartDate.clone();
+            //             this.endDate = this.oldEndDate.clone();
+            //         }
 
-            picker.show();
+            //         if ((!this.startDate.isSame(this.oldStartDate) || !this.endDate.isSame(this.oldEndDate)) || this.startDate.format('LL') === this.endDate.format('LL'))
+            //             this.callback(this.startDate, this.endDate, this.chosenLabel);
+
+            //         this.updateCalendars();
+            //         this.updateElement();
+            //     };
+            // });
+
+            // picker.show();
             this.isEnabled = () => false;
 
             var orders = $scope.viewStats.get_selected_orders();

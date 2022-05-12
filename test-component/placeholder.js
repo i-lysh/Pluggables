@@ -27,12 +27,7 @@ define(function (require) {
         //         </content>
         //     </div>
         // </div>`;
-            
-        $http({
-            method: "GET",
-            url: "https://localhost:44322/task/connect"
-        }).then(function(data){console.log(data)});
-
+         
         this.getItems = () => {
             var items = [{
                 text: "Print Labels",  // Button name

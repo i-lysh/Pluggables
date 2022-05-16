@@ -47,7 +47,9 @@ define(function (require) {
         };
 
         this.onClick = () => {
-            console.log(moment());
+            console.log($scope);
+            console.log($element);
+            console.log(controlService);
 
 var row = angular.element('.legacy-windows-container');
                 row[0].innerHTML = `<div class="lwControlBackDrop"> </div>

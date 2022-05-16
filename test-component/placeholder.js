@@ -49,6 +49,7 @@ define(function (require) {
         this.onClick = () => {
             console.log($scope);
             console.log($element);
+            console.log($http);
             console.log(controlService);
 
 var row = angular.element('.legacy-windows-container');

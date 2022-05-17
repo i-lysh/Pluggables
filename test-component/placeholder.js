@@ -47,10 +47,6 @@ define(function (require) {
         };
 
         this.onClick = () => {
-            console.log($scope);
-            console.log($element);
-            console.log($http);
-            console.log(controlService);
 
 var row = angular.element('.legacy-windows-container');
                 row[0].innerHTML = `<div class="lwControlBackDrop"> </div>
@@ -102,8 +98,10 @@ var row = angular.element('.legacy-windows-container');
 
         var doBtn = document.createElement("Button");
         doBtn.onclick = function () {
-                // const self = this;
-                
+                const self = this;
+                const importService = new Services.ImportExportService(self);
+
+                importService.getDropboxAccounts((d) => {console.log(d);});
             // const orderService = new Services.OrdersService(self);
             //     console.log(orderService);
         }; 

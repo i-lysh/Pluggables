@@ -55,26 +55,25 @@ define(function (require) {
         importService.getDropboxAccounts(data => {
             var accounts = data.result;
             
-            var n = accounts.forEach(d => `<option value="${d.Name}">${d.Token}</option>`);
+            var n = [];
+            accounts.forEach(d => n.push(`<option value="${d.Token}">${d.Name}</option>`));
 
+            var row = angular.element('.legacy-windows-container');
+            
+            row[0].innerHTML = `
+            <div class="lwControlBackDrop"> </div>
+            <div class="lwControl dynamic" style="left: 289px; top: 84px;">
+                <div class="content">
+                    <content id="pluggableForm">
+                        <input id="daterangepicker"/>
+                        <select id="accountSelect">
+                            ${n.join("\n")};
+                        </select>
+                    </content>
+                </div>
+            </div>`;
 
-
-
-
-
-        });
-
-
-var row = angular.element('.legacy-windows-container');
-                row[0].innerHTML = `<div class="lwControlBackDrop"> </div>
-        <div class="lwControl dynamic" style="left: 289px; top: 84px;">
-            <div class="content">
-                <content id="pluggableForm">
-<input id="daterangepicker"/>
-                </content>
-            </div>
-        </div>`;
-                row = angular.element('#daterangepicker');
+            row = angular.element('#daterangepicker');
                 var $div = $(row[0]);
                     $div.daterangepicker({
                 alwaysShowCalendars: true,
@@ -91,167 +90,228 @@ var row = angular.element('.legacy-windows-container');
                     'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
                 }
             }, function (from, to) {
-                // if (($scope.dateFilter.fromDate === null || $scope.dateFilter.fromDate.toISOString() !== from.toISOString()) || ($scope.dateFilter.toDate === null || $scope.dateFilter.toDate.toISOString() !== to.toISOString())) {
-                //     $scope.dateFilter.fromDate = from;
-                //     $scope.dateFilter.toDate = to;
-                //     $scope.updateFilters();
-                // }
-                console.log("some function");
             });
-                $div.trigger("click");
-                // picker.style.display ="none";
-            // $div.off("click.daterangepicker");
-            // $div.on("show.daterangepicker", function () {
-        //picker.container.appendTo($div);
-        var closeBtn = document.createElement("Button");
-        closeBtn.onclick = function () {
+
+            $div.trigger("click");
+
+            var closeBtn = document.createElement("Button");
+
+            closeBtn.onclick = function () {
                 var row = angular.element('.legacy-windows-container');
                 row[0].innerHTML = "";
                 const picker = $div.data("daterangepicker");
                 picker.remove();
                 return;
-        }; 
-        closeBtn.innerHTML = "Close";
+            }; 
+            closeBtn.innerHTML = "Close";
 
-        var doBtn = document.createElement("Button");
-        doBtn.onclick = function () {
-                const self = this;
-                const importService = new Services.ImportExportService(self);
+            var doBtn = document.createElement("Button");
 
-                importService.getDropboxAccounts((d) => {console.log(d);});
+            doBtn.onclick = function () {
+                // const self = this;
+                //var list = ('#accountSelect')
+
             // const orderService = new Services.OrdersService(self);
             //     console.log(orderService);
-        }; 
-        doBtn.innerHTML = "Create reports";
-        var content = document.getElementById("pluggableForm");
+            }; 
+            doBtn.innerHTML = "Create reports";
+            var content = document.getElementById("pluggableForm");
                 
                 
-        content.append(closeBtn);
-        content.append(doBtn);
+            content.append(closeBtn);
+            content.append(doBtn);
 
 
-            // const picker = $div.data("daterangepicker");
-            // $div.off("click.daterangepicker");
-            // $div.on("show.daterangepicker", function () {
-            //     picker.container.appendTo($div);
-            //     $(document).off('.daterangepicker');
-            //     $(window).off('.daterangepicker');
+        });
 
-            //     picker.hide = function () {
-            //         if (!this.endDate) {
-            //             this.startDate = this.oldStartDate.clone();
-            //             this.endDate = this.oldEndDate.clone();
-            //         }
 
-            //         if ((!this.startDate.isSame(this.oldStartDate) || !this.endDate.isSame(this.oldEndDate)) || this.startDate.format('LL') === this.endDate.format('LL'))
-            //             this.callback(this.startDate, this.endDate, this.chosenLabel);
+// var row = angular.element('.legacy-windows-container');
+//                 row[0].innerHTML = `<div class="lwControlBackDrop"> </div>
+//         <div class="lwControl dynamic" style="left: 289px; top: 84px;">
+//             <div class="content">
+//                 <content id="pluggableForm">
+// <input id="daterangepicker"/>
+//                 </content>
+//             </div>
+//         </div>`;
+//                 row = angular.element('#daterangepicker');
+//                 var $div = $(row[0]);
+//                     $div.daterangepicker({
+//                 alwaysShowCalendars: true,
+//                 showDate: true,
+//                 opens: 'left',
+//                 maxDate: "0",
+//                 autoApply: true,
+//                 ranges: {
+//                     'Today': [moment(), moment()],
+//                     'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+//                     'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+//                     'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+//                     'This Month': [moment().startOf('month'), moment().endOf('month')],
+//                     'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+//                 }
+//             }, function (from, to) {
+//                 // if (($scope.dateFilter.fromDate === null || $scope.dateFilter.fromDate.toISOString() !== from.toISOString()) || ($scope.dateFilter.toDate === null || $scope.dateFilter.toDate.toISOString() !== to.toISOString())) {
+//                 //     $scope.dateFilter.fromDate = from;
+//                 //     $scope.dateFilter.toDate = to;
+//                 //     $scope.updateFilters();
+//                 // }
+//                 console.log("some function");
+//             });
+//                 $div.trigger("click");
+//                 // picker.style.display ="none";
+//             // $div.off("click.daterangepicker");
+//             // $div.on("show.daterangepicker", function () {
+//         //picker.container.appendTo($div);
+//         var closeBtn = document.createElement("Button");
+//         closeBtn.onclick = function () {
+//                 var row = angular.element('.legacy-windows-container');
+//                 row[0].innerHTML = "";
+//                 const picker = $div.data("daterangepicker");
+//                 picker.remove();
+//                 return;
+//         }; 
+//         closeBtn.innerHTML = "Close";
 
-            //         this.updateCalendars();
-            //         this.updateElement();
-            //     };
-            // });
+//         var doBtn = document.createElement("Button");
+//         doBtn.onclick = function () {
+//                 const self = this;
+//                 const importService = new Services.ImportExportService(self);
 
-            // picker.show();
-            this.isEnabled = () => false;
+//                 importService.getDropboxAccounts((d) => {console.log(d);});
+//             // const orderService = new Services.OrdersService(self);
+//             //     console.log(orderService);
+//         }; 
+//         doBtn.innerHTML = "Create reports";
+//         var content = document.getElementById("pluggableForm");
+                
+                
+//         content.append(closeBtn);
+//         content.append(doBtn);
 
-            var orders = $scope.viewStats.get_selected_orders();
 
-            //const self = this;
+//             // const picker = $div.data("daterangepicker");
+//             // $div.off("click.daterangepicker");
+//             // $div.on("show.daterangepicker", function () {
+//             //     picker.container.appendTo($div);
+//             //     $(document).off('.daterangepicker');
+//             //     $(window).off('.daterangepicker');
 
-            const orderService = new Services.OrdersService(self);
-            const printService = new Services.PrintService(self);
+//             //     picker.hide = function () {
+//             //         if (!this.endDate) {
+//             //             this.startDate = this.oldStartDate.clone();
+//             //             this.endDate = this.oldEndDate.clone();
+//             //         }
 
-            if (orders.length < 1) {
-                alert('Please select at least one order');
-                this.isEnabled = () => true;
-                return;
-            }
+//             //         if ((!this.startDate.isSame(this.oldStartDate) || !this.endDate.isSame(this.oldEndDate)) || this.startDate.format('LL') === this.endDate.format('LL'))
+//             //             this.callback(this.startDate, this.endDate, this.chosenLabel);
 
-            var ids = [];
-            for (var i = 0; i < orders.length; i++)
-            {
-                var id = orders[i].id;
-                ids.push(id);
-            }
+//             //         this.updateCalendars();
+//             //         this.updateElement();
+//             //     };
+//             // });
+
+//             // picker.show();
+//             this.isEnabled = () => false;
+
+//             var orders = $scope.viewStats.get_selected_orders();
+
+//             //const self = this;
+
+//             const orderService = new Services.OrdersService(self);
+//             const printService = new Services.PrintService(self);
+
+//             if (orders.length < 1) {
+//                 alert('Please select at least one order');
+//                 this.isEnabled = () => true;
+//                 return;
+//             }
+
+//             var ids = [];
+//             for (var i = 0; i < orders.length; i++)
+//             {
+//                 var id = orders[i].id;
+//                 ids.push(id);
+//             }
             
-            let pages = ids.length % 200>0 ? parseInt(ids.length/200)+1 : parseInt(ids.length/200);
-            // var file;
-            let items = [];
-            let promises = [];
-            for(let i = 0; i<pages; i++)
-            {
-                let p = new Promise((resolved, rejected) => {
-                    orderService.GetOrdersById(ids.filter((o, ind) => ind >= i*200 && ind < (i+1)*200), (data) => {
-                        if(data.error != null){
-                            console.log(data.error);
-                            resolved();
-                        }
+//             let pages = ids.length % 200>0 ? parseInt(ids.length/200)+1 : parseInt(ids.length/200);
+//             // var file;
+//             let items = [];
+//             let promises = [];
+//             for(let i = 0; i<pages; i++)
+//             {
+//                 let p = new Promise((resolved, rejected) => {
+//                     orderService.GetOrdersById(ids.filter((o, ind) => ind >= i*200 && ind < (i+1)*200), (data) => {
+//                         if(data.error != null){
+//                             console.log(data.error);
+//                             resolved();
+//                         }
         
-                        let orders = [];
-                        orders = data.result;
+//                         let orders = [];
+//                         orders = data.result;
                         
-                        // var items = orders.flatMap(x => x.Items);
-                        // var items = [];
-                        orders.forEach(order => {
-                            order.Items.forEach(item => {
-                                let index = items.findIndex(i => i.StockItemId == item.StockItemId);
-                                if( index < 0)
-                                {
-                                    items.push({StockItemId: item.StockItemId, Quantity: item.Quantity, BinRack: item.BinRack});
-                                }
-                                else
-                                {
-                                    items[index].Quantity+=item.Quantity;
-                                }
-                            })
-                        });
-                        resolved();
-                    })
-                });
+//                         // var items = orders.flatMap(x => x.Items);
+//                         // var items = [];
+//                         orders.forEach(order => {
+//                             order.Items.forEach(item => {
+//                                 let index = items.findIndex(i => i.StockItemId == item.StockItemId);
+//                                 if( index < 0)
+//                                 {
+//                                     items.push({StockItemId: item.StockItemId, Quantity: item.Quantity, BinRack: item.BinRack});
+//                                 }
+//                                 else
+//                                 {
+//                                     items[index].Quantity+=item.Quantity;
+//                                 }
+//                             })
+//                         });
+//                         resolved();
+//                     })
+//                 });
 
-                promises.push(p);
-            }
+//                 promises.push(p);
+//             }
             
-            Promise.all(promises).then(() => {
-                items.sort((a,b) =>{
-                    return a.BinRack.localeCompare(b.BinRack, 'en', { numeric: true });
-                });
+//             Promise.all(promises).then(() => {
+//                 items.sort((a,b) =>{
+//                     return a.BinRack.localeCompare(b.BinRack, 'en', { numeric: true });
+//                 });
                 
-                printService.GetTemplateList("Stock Item Labels", (data) =>{
-                    if(data.error)
-                    {
-                        this.isEnabled = () => true;
-                        console.log(data.error);
-                        return;
-                    }
+//                 printService.GetTemplateList("Stock Item Labels", (data) =>{
+//                     if(data.error)
+//                     {
+//                         this.isEnabled = () => true;
+//                         console.log(data.error);
+//                         return;
+//                     }
 
-                    var templates = data.result;
+//                     var templates = data.result;
 
-                    var template = templates.find(t => t.TemplateName == TemplateName);
+//                     var template = templates.find(t => t.TemplateName == TemplateName);
 
-                    printService.CreatePDFfromJobForceTemplateWithQuantities(
-                        "Stock Item Labels", 
-                        items.map(i => {return {"Key":i.StockItemId, "Value":i.Quantity}}), 
-                        template? template.pkTemplateRowId : null, 
-                        [
-                            {"Key":"IdType","Value":"StockId"},
-                        // {"Key":"LocationId", "Value":"00000000-0000-0000-0000-000000000000"}
-                        ], 
-                        null,
-                        (res) =>{
-                        this.isEnabled = () => true;
-                        if(res.error)
-                        {
-                            console.log(res.error);
-                            return;
-                        }
+//                     printService.CreatePDFfromJobForceTemplateWithQuantities(
+//                         "Stock Item Labels", 
+//                         items.map(i => {return {"Key":i.StockItemId, "Value":i.Quantity}}), 
+//                         template? template.pkTemplateRowId : null, 
+//                         [
+//                             {"Key":"IdType","Value":"StockId"},
+//                         // {"Key":"LocationId", "Value":"00000000-0000-0000-0000-000000000000"}
+//                         ], 
+//                         null,
+//                         (res) =>{
+//                         this.isEnabled = () => true;
+//                         if(res.error)
+//                         {
+//                             console.log(res.error);
+//                             return;
+//                         }
 
-                        // var result = res.result;
+//                         // var result = res.result;
                         
-                        // printService.OpenPrintDialog(result.URL);
-                    })
-                })
-            })
+//                         // printService.OpenPrintDialog(result.URL);
+//                     })
+//                 })
+//             })
         };
 
        

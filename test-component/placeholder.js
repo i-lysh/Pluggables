@@ -8,6 +8,7 @@ define(function (require) {
     //const Window = require("core/Window");
 
     var placeHolder = function ($scope, $element, $http, controlService) {
+
         // var input = document.createElement() 
         // document.getElementsByClassName("")[0].append();
         // console.log();
@@ -47,6 +48,22 @@ define(function (require) {
         };
 
         this.onClick = () => {
+            
+        const self = this;
+        const importService = new Services.ImportExportService(self);
+
+        importService.getDropboxAccounts(data => {
+            var accounts = data.result;
+            
+            var n = accounts.forEach(d => `<option value="${d.Name}">${d.Token}</option>`);
+
+
+
+
+
+
+        });
+
 
 var row = angular.element('.legacy-windows-container');
                 row[0].innerHTML = `<div class="lwControlBackDrop"> </div>
@@ -139,7 +156,7 @@ var row = angular.element('.legacy-windows-container');
 
             var orders = $scope.viewStats.get_selected_orders();
 
-            const self = this;
+            //const self = this;
 
             const orderService = new Services.OrdersService(self);
             const printService = new Services.PrintService(self);

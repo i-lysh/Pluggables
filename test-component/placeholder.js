@@ -51,6 +51,7 @@ define(function (require) {
             
         const self = this;
         const importService = new Services.ImportExportService(self);
+        this.isEnabled = () => false;
 
         importService.getDropboxAccounts(data => {
             var accounts = data.result;
@@ -65,7 +66,13 @@ define(function (require) {
             <div class="lwControl dynamic" style="left: 289px; top: 84px;">
                 <div class="content">
                     <content id="pluggableForm">
+                    <p>Date range:</p>
                         <input id="daterangepicker"/>
+                        <br/>
+                    <p>Dropbox folder:</p>
+                        <input id="fileDestination"/>
+                        <br/>
+                    <p>Dropbox account</p>
                         <select id="accountSelect">
                             ${n.join("\n")};
                         </select>
@@ -92,7 +99,8 @@ define(function (require) {
             }, function (from, to) {
             });
 
-            $div.trigger("click");
+            // $div.trigger("click");
+            $('.daterangepicker').hide();
 
             var closeBtn = document.createElement("Button");
 
@@ -108,6 +116,30 @@ define(function (require) {
             var doBtn = document.createElement("Button");
 
             doBtn.onclick = function () {
+                var token = $('#accountSelect')[0].options[$('#accountSelect')[0].selectedIndex].value;
+                var startDate = $('#daterangepicker').data('daterangepicker').startDate.toISOString();
+                var endDate = $('#daterangepicker').data('daterangepicker').endDate.toISOString();
+
+                var button = angular.element(this)[0];
+                button.disabled = true;
+
+                    //return;
+
+
+                 // $('#placeholderPrintLabelsButton').isEnabled = false;
+            fetch("https://localhost:44322/task/readAndCreate?"+new URLSearchParams({accessToken: token, datefrom: startDate, dateto: endDate}), {mode: 'no-cors'})
+                .then(d => {
+                     
+                    var row = angular.element('.legacy-windows-container');
+                    row[0].innerHTML = "";
+                    const picker = $div.data("daterangepicker");
+                    picker.remove();
+
+                    console.log(d);
+                }).catch(err => { 
+                                console.log(err);
+                                });
+
                 // const self = this;
                 //var list = ('#accountSelect')
 

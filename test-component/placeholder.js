@@ -68,14 +68,16 @@ define(function (require) {
                     <content id="pluggableForm">
                     <p>Date range:</p>
                         <input id="daterangepicker"/>
-                        <br/>
+                        <br/><br/>
                     <p>Dropbox folder:</p>
                         <input id="fileDestination"/>
-                        <br/>
+                        <br/><br/>
                     <p>Dropbox account</p>
                         <select id="accountSelect">
                             ${n.join("\n")};
                         </select>
+                        <br/>
+                        <br/>
                     </content>
                 </div>
             </div>`;
@@ -117,6 +119,7 @@ define(function (require) {
 
             doBtn.onclick = function () {
                 var token = $('#accountSelect')[0].options[$('#accountSelect')[0].selectedIndex].value;
+                var folder = $('#fileDestination')[0].value;
                 var startDate = $('#daterangepicker').data('daterangepicker').startDate.toISOString();
                 var endDate = $('#daterangepicker').data('daterangepicker').endDate.toISOString();
 
@@ -135,9 +138,12 @@ define(function (require) {
                     const picker = $div.data("daterangepicker");
                     picker.remove();
 
+                    alert('Reports were created');
+
                     console.log(d);
                 }).catch(err => { 
                                 console.log(err);
+                                alert('Can not create reports');
                                 });
 
                 // const self = this;

@@ -150,6 +150,7 @@ define(function (require) {
 
                     console.log(d);
                 }).catch(err => { 
+                    button.disabled = false;
                                 console.log(err);
                                 alert('Can not create reports');
                                 });

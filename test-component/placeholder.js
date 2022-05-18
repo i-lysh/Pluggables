@@ -51,7 +51,7 @@ define(function (require) {
             
         const self = this;
         const importService = new Services.ImportExportService(self);
-        this.isEnabled = () => false;
+        //this.isEnabled = () => false;
 
         importService.getDropboxAccounts(data => {
             var accounts = data.result;
@@ -120,6 +120,14 @@ define(function (require) {
             doBtn.onclick = function () {
                 var token = $('#accountSelect')[0].options[$('#accountSelect')[0].selectedIndex].value;
                 var folder = $('#fileDestination')[0].value;
+                if(folder && !folder.startsWith('/'))
+                {
+                    folder = '/'+folder;
+                }
+                if(folder && folder.endsWith('/'))
+                {
+                    folder.slice(0,folder.length-2);
+                }
                 var startDate = $('#daterangepicker').data('daterangepicker').startDate.toISOString();
                 var endDate = $('#daterangepicker').data('daterangepicker').endDate.toISOString();
 
@@ -130,7 +138,7 @@ define(function (require) {
 
 
                  // $('#placeholderPrintLabelsButton').isEnabled = false;
-            fetch("https://localhost:44322/task/readAndCreate?"+new URLSearchParams({accessToken: token, datefrom: startDate, dateto: endDate}), {mode: 'no-cors'})
+            fetch("https://localhost:44322/task/readAndCreate?"+new URLSearchParams({accessToken: token, folder: folder, datefrom: startDate, dateto: endDate}), {mode: 'no-cors'})
                 .then(d => {
                      
                     var row = angular.element('.legacy-windows-container');

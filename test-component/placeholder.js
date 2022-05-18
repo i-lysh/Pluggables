@@ -126,7 +126,7 @@ define(function (require) {
                 }
                 if(folder && folder.endsWith('/'))
                 {
-                    folder.slice(0,folder.length-2);
+                    folder = folder.slice(0,folder.length-1);
                 }
                 var startDate = $('#daterangepicker').data('daterangepicker').startDate.toISOString();
                 var endDate = $('#daterangepicker').data('daterangepicker').endDate.toISOString();

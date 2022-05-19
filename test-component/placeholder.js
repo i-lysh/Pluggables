@@ -47,10 +47,10 @@ define(function (require) {
                 <div class="content">
                     <content id="pluggableForm">
                     <p>Date range:</p>
-                        <input id="daterangepicker"/>
+                        <input id="daterangepicker" class="input alt"/>
                         <br/><br/>
                     <p>Dropbox folder:</p>
-                        <input id="fileDestination"/>
+                        <input id="fileDestination" class="input alt"/>
                         <br/><br/>
                     <p>Dropbox account</p>
                         <select id="accountSelect">
@@ -94,8 +94,11 @@ define(function (require) {
                 return;
             }; 
             closeBtn.innerHTML = "Close";
+            closeBtn.classList.add("btn");
 
             var doBtn = document.createElement("Button");
+            doBtn.style.float = "right";
+            doBtn.classList.add("btn");
 
             doBtn.onclick = function () {
                 var token = $('#accountSelect')[0].options[$('#accountSelect')[0].selectedIndex].value;

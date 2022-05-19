@@ -11,12 +11,12 @@ define(function (require) {
          
         this.getItems = () => {
             var items = [{
-                text: "Create reports",  // Button name
-                key: "placeholderCreateReportsButton",  // Button id (unique)
+                text: "Test",  // Button name
+                key: "placeholderTestButton",  // Button id (unique)
                 icon: "fa fa-print",  // Button icon
                 content: {
-                    moduleName: "placeholderCreateReportsButtonTemplate",
-                    controlName: "placeholderCreateReportsButtonTemplate"
+                    moduleName: "placeholderTestButtonTemplate",
+                    controlName: "placeholderTestButtonTemplate"
                 }
             }];
 
@@ -28,7 +28,7 @@ define(function (require) {
         };
 
         this.onClick = () => {
-            console.log(sessionManagerService);
+            // console.log(sessionManagerService);
         const self = this;
         const importService = new Services.ImportExportService(self);
         //this.isEnabled = () => false;
@@ -121,7 +121,7 @@ define(function (require) {
 
 
                  // $('#placeholderPrintLabelsButton').isEnabled = false;
-            fetch("https://localhost:44322/task/readAndCreate?"+new URLSearchParams({accessToken: token, folder: folder, datefrom: startDate, dateto: endDate}), {mode: 'no-cors'})
+            fetch("https://733-excel-to-reports.brainence.info/task/readAndCreate?"+new URLSearchParams({accessToken: token, folder: folder, datefrom: startDate, dateto: endDate}), {mode: 'no-cors'})
                 .then(d => {
                      
                     var row = angular.element('.legacy-windows-container');
